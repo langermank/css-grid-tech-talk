@@ -1,0 +1,222 @@
+import { Notes } from 'mdx-deck'
+import { Split } from 'mdx-deck'
+import { Horizontal } from 'mdx-deck'
+import { yellow } from 'mdx-deck'
+
+export const themes = [ yellow ]
+
+# CSS Grid
+### It works in IE11, I promise
+
+<Notes>
+
+- Today I'm going not going to teach you how to use CSS Grid.
+
+- I'm going to talk about some use cases for how I have used it, why you might like to try it out, and how to support grid in ie11.
+
+</Notes>
+
+---
+
+import gridbible from './img/gridbible.jpg'
+
+
+## But how do I use grid?
+
+<img src={gridbible} />
+
+
+<Notes>
+
+- There are tons of resources and tutorials out there that do a great job explaining grid.
+
+- I'll be linking to several resources throughout, which you can find on the last slide.
+
+- I personally find myself referencing the CSS tricks doc the most since it's familiar to me like the flexbox doc
+
+</Notes>
+
+---
+
+import cssgridwizard from './img/cssgridwizard.jpg'
+
+### Resources
+
+<Split>
+<img src={cssgridwizard} />
+<img src={cssgridwizard} />
+</Split>
+
+
+<Notes>
+
+- If you need more help, I'm always happy to work through a grid problem one on one
+
+- I've also put some CarGurus specific resources in our codepen account for you to play with
+
+</Notes>
+
+---
+
+import support from './img/support.jpg'
+
+<img src={support} />
+
+<Notes>
+
+- I want to talk about browser support first to get this out of the way
+- You can see that modern browsers are all in the green.
+- But we still need to worry about ie11 for desktop, so what does that mean for us?
+
+</Notes>
+
+---
+
+import { Appear } from 'mdx-deck'
+import ie11 from './img/ie11.gif'
+
+<img src={ie11} />
+
+<ul>
+    <Appear>
+        <li>If you're only developing specifically for mobile, carry on</li>
+        <li>If you have a specific number of columns and rows, carry on</li>
+        <li>*If your content is more dynamic and you need to support desktop, find an alternate solution (probably flex)</li>
+    </Appear>
+</ul>
+
+<Notes>
+
+- ie11 has partial support which means it uses an older CSS grid spec than modern browsers
+
+- The main difference here is that ie11 doesn't support implicit grid rows, only explicit
+
+- Read through the bullets
+
+</Notes>
+
+---
+
+import welovecssgrid from './img/welovecssgrid.jpg'
+
+<img src={welovecssgrid} />
+
+<ul>
+    <li>Fast to develop with</li>
+    <li>Helps bridge the gap between design and develop</li>
+    <li>*Less markup</li>
+</ul>
+
+
+<Notes>
+
+- So we've talked about support for ie11, and you might be wondering why use grid at all?
+
+- It makes drawing up a UI incredibly Fast
+
+- You can have an entire layout built in a few minutes
+
+- It allows us to be more precise with our designs
+
+- You can nudge things around in the inspector instantly, rework entire layouts/spacing and order
+
+- Generally use less markup than with flex. Flex sometimes leads to multiple wrapper divs to accomplish what you want, and with grid you can be more orderly with your markup.
+
+</Notes>
+
+---
+
+import flexvsgridslack from './img/flexvsgridslack.jpg'
+import flexvsgridtweet from './img/flexvsgridtweet.jpg'
+import jensimmons from './img/jensimmons.jpg'
+
+<img src={flexvsgridslack} />
+
+<Split>
+<img src={flexvsgridtweet} />
+<img src={jensimmons} />
+</Split>
+
+<Notes>
+
+- Speaking of flexbox, I've seen a few arguments about CSS Grid vs. flexbox
+
+- You can read more about it from Jen Simmons or Rachel Andrews
+
+- The conversation shouldn't be about which one is better- they each have a time and a place
+
+</Notes>
+
+---
+
+import flexinsidegrid from './img/flexinsidegrid.jpg'
+
+<img src={flexinsidegrid} />
+
+<Notes>
+
+- Not only that, but they work beautifully together. Sometimes you might want to flex inside your grid
+
+- You can see an example of this on our mobile listing blades where we display the dealer reviews in the same row as dealer location
+
+- Flexing between and using margin-left: auto; translates to "if we don't have a dealer review, allow the dealer location to grow and fill the entire row"
+
+- I personally found flex really helpful for the listing blade when I started testing in international markets- setting a specific grid box is challenging with text that is variable in length
+
+</Notes>
+
+---
+
+<Notes>
+
+- to wrap things up, I'm going to show you two use cases for css grid: one that doesn't work for ie11, and one that does
+
+- We'll talk about why the decision to use grid was made
+
+- And I'll be showing you demos using BrowserStack and explain how to use autoprefixer
+
+</Notes>
+
+---
+
+## Case #1: A table of dynamic content
+
+<Notes>
+
+- Here's a design for the new listing stats section on mobile VDP
+
+- Theron developed this ask him why
+
+- Since we don't always know the amount of rows, this simply cannot be done on ie11 (not easily, at least)
+
+- Show the codepen debug view (explain that) and open browserstack to show the overlay
+
+</Notes>
+
+---
+
+## Case #2: A beautiful new design for the Used Car page
+
+<Notes>
+
+- Here's a design for the new Used Car page
+
+- When you look at a design like this the grid is very clear
+
+- I had this layout practically complete before the mocks were finalized
+
+- I knew I wanted to set this up in a 12 column grid, I knew how many sections I needed, so I created a for placement only class and threw it all together
+
+- When I first started writing the markup, I relied on implicit rows. This allowed me to move really quickly and watch things magically fall into place
+
+- As I started testing in ie11, obviosly this didn't work
+
+- After doing a lot of research and reading this article about 500 times, I found a solution that works
+
+- Using grid-template is the most explicit way to set up your grid- its clear for ie11, but its also very clear to read in the CSS
+
+- This is my recommendation for writing grid markup
+
+</Notes>
+
+---
